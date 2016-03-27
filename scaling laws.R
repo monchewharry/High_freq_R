@@ -17,6 +17,16 @@ getsd<-function(k,p){
   (mean(abs(ret)^(p)))^(1/p)
 }
 
-vol<-sapply(seq(3600), getsd,p=1)
+vol<-c()
+for(i in seq(60)){
+  v<-getsd(k = i,p = 1)
+  print(i)
+  vol<-c(vol,v)
+}
 
-plot(log(seq(3600)),log(vol))
+(m <- lm(log(vol)~log(seq(60))))
+
+png("basic_Stat/scale.png",width = 1000)
+plot(log(seq(60)),log(vol))
+abline(m$coefficients)
+dev.off()
