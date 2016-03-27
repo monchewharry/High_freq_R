@@ -73,7 +73,7 @@ gaindata <- function(pair, year, month)
 
 downloadFX<-function(pair ,year ,month =  01){
   fx<<-gaindata(pair = pair,year =  year,month =  month)  
-  save(fx,file = paste(pair,year,month,".RData",sep="" ))
+  save(fx,file = paste("../",pair,year,month,".RData",sep="" ))
 }
 
 downloadFX(pair = "eurusd",year =  2015,month =  01)  

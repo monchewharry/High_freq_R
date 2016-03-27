@@ -1,4 +1,4 @@
-load("eurusd20151.RData")
+load("../eurusd20151.RData")
 suppressMessages(library(quantmod))
 #take cl as the previous tick interpolation
 
