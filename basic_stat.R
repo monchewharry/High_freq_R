@@ -24,9 +24,11 @@ fx.ohlc[is.na(fx.ohlc[,"High"]),"High"] <-
 
 ## quantmod::chart
 clfx<-Cl(fx.ohlc)['2015-01-05 05:00::2015-01-07 13:00',]
+png("basic_Stat/1min_Clrate",width = 1000)
 chartSeries(clfx
             ,theme=chartTheme("white",bg.col=0)
             ,name="eurusd20151")
+dev.off()
 
 ####1 min Returns tail#####  
 rm(list = ls(envir = .GlobalEnv)[-grep(pattern = "^fx$",x = ls(envir = .GlobalEnv))])
@@ -50,7 +52,10 @@ library(moments)
 skewness(minRet)#should be close to 0
 kurtosis(minRet)#should be close to 0
 summary(minRet)
+png("basic_Stat/density.png",width = 1000)
 plot(density(minRet))
+dev.off()
+
 
 ####return seasonality ####  
 #autocorrelation of hourly return
@@ -78,7 +83,10 @@ oneday<- hourRet
 volatility <-sapply(split(oneday, index(oneday)), v, p=1)
 t <- as.POSIXct(strptime(names(volatility),"%Y-%m-%d %H:%M:%S"))
 volatility <-.xts(volatility,index = t)
-barplot(volatility)#u shape volatility
+
+png("basic_Stat/volatility.png",width = 2000)
+barplot(volatility)#u shape volatility  
+dev.off()
 
 
 
